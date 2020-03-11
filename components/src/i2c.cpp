@@ -1,4 +1,4 @@
-#include "components/include/i2c.h"
+#include "i2c.h"
 
 I2CPeriph::I2CPeriph(i2c_num_t _num) {
     if(_num == I2C0_PERIPH) i2c = &I2C0;

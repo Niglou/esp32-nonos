@@ -1,4 +1,4 @@
-#include "components/include/timer.h"
+#include "timer.h"
 
 TIMPeriph::TIMPeriph() {}
 

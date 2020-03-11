@@ -1,7 +1,7 @@
 #ifndef H_NONOS_SPI
 #define H_NONOS_SPI
 
-#include "components/registers/struct/spi_struct.h"
+#include <registers/struct/spi_struct.h>
 
 typedef enum { SPI0_PERIPH, SPI1_PERIPH, SPI2_PERIPH, SPI3_PERIPH } spi_periph_t;
 typedef enum { MASTER, SLAVE } spi_mode_t;

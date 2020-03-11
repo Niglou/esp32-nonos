@@ -1,4 +1,4 @@
-#include <ESP32/registers/specreg.h>
+#include <registers/specreg.h>
 
 /*
 ********************* ISR ********************
@@ -182,7 +182,7 @@ xt_nmi:
 
     /* restore state before interrupt */
     intr_restore_registers intr_nmi_stack
-    
+
     /* Quit interrupt */
     rsr     a0, EXCSAVE_7
     rfi     7

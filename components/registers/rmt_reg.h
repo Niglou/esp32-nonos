@@ -14,7 +14,7 @@
 #ifndef _SOC_RMT_REG_H_
 #define _SOC_RMT_REG_H_
 
-#include "components/registers/soc.h"
+#include <registers/soc.h>
 
 #define RMT_CH0DATA_REG          (DR_REG_RMT_BASE + 0x0000)
 

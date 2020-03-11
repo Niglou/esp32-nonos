@@ -1,1 +1,1 @@
-#include "components/include/i2s.h"
+#include "i2s.h"

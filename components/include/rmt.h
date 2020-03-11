@@ -1,7 +1,7 @@
 #ifndef H_NONOS_RMT
 #define H_NONOS_RMT
 
-#include "components/registers/struct/rmt_struct.h"
+#include <registers/struct/rmt_struct.h>
 
 typedef enum { CHANNEL_0, CHANNEL_1, CHANNEL_2, CHANNEL_3, CHANNEL_4, CHANNEL_5, CHANNEL_6, CHANNEL_7 } rmt_ch_t;
 typedef enum { TRANSMITTER, RECEIVER } rmt_mode_t;

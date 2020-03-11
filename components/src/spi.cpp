@@ -1,4 +1,4 @@
-#include "components/include/spi.h"
+#include "spi.h"
 
 SPIPeriph::SPIPeriph(spi_periph_t _spi) {
   if(_spi == SPI0_PERIPH) spi = &SPI0;

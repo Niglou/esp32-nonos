@@ -1,7 +1,7 @@
-#include "components/registers/dport_reg.h"
-#include "components/registers/rmt_reg.h"
+#include <registers/dport_reg.h>
+#include <registers/rmt_reg.h>
 
-#include "components/include/rmt.h"
+#include "rmt.h"
 
 RMTPeriph::RMTPeriph() {}
 

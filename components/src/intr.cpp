@@ -1,4 +1,4 @@
-#include "components/include/intr.h"
+#include "intr.h"
 
 void intr_enable(unsigned int interrupt) {
     asm volatile (

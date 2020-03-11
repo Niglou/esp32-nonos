@@ -1,7 +1,7 @@
 #ifndef H_NONOS_TIMER
 #define H_NONOS_TIMER
 
-#include "components/registers/struct/timer_struct.h"
+#include <registers/struct/timer_struct.h>
 
 typedef enum { GROUP0, GROUP1 } timer_group_t;
 typedef enum { TIMER0, TIMER1 } timer_num_t;

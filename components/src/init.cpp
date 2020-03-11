@@ -1,8 +1,8 @@
 
-#include <components/registers/struct/rtc_cntl_struct.h>
-#include <components/registers/struct/timer_struct.h>
-#include <components/registers/struct/uart_struct.h>
-#include <components/registers/dport_reg.h>
+#include <registers/struct/rtc_cntl_struct.h>
+#include <registers/struct/timer_struct.h>
+#include <registers/struct/uart_struct.h>
+#include <registers/dport_reg.h>
 
 
 extern "C" {

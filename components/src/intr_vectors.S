@@ -1,4 +1,4 @@
-#include <ESP32/registers/specreg.h>
+#include <registers/specreg.h>
 
     .begin      literal_prefix .Level2InterruptVector
     .section    .Level2InterruptVector.text, "ax"

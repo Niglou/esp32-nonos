@@ -1,6 +1,8 @@
-#include "components/include/spi_flash.h"
-#include "components/registers/struct/iomux_struct.h"
-#include "components/registers/struct/gpio_struct.h"
+#include <registers/struct/iomux_struct.h>
+#include <registers/struct/gpio_struct.h>
+
+#include "spi_flash.h"
+
 
 intFlashClass::intFlashClass(SPIPeriph *spi) {
   _spi = spi;

@@ -1,7 +1,7 @@
 #ifndef H_NONOS_I2C
 #define H_NONOS_I2C
 
-#include "components/registers/struct/i2c_struct.h"
+#include <registers/struct/i2c_struct.h>
 
 typedef enum { I2C_SLAVE, I2C_MASTER } i2c_mode_t;
 typedef enum { I2C0_PERIPH, I2C1_PERIPH } i2c_num_t;
