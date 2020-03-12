@@ -10,7 +10,9 @@ Use esp32 in real time without OS.
 ## Compile
 
 `make` or `make build`  
-will compile objects files in "builds" folder
+will compile objects files in "builds" folder.
+
+The "Makefile" is basic, it can be improved.
 
 
 ## Template
