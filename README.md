@@ -12,14 +12,15 @@ Use esp32 in real-time without OS.
 You need **xtensa-esp32-elf** binaries to compile project.  
 Instruction from https://docs.espressif.com/projects/esp-idf/en/latest/get-started/linux-setup-scratch.html  
 
-Once you have the binaries, set the path of binaries in "Makefile".
+Once you have the binaries, change the path of binaries in "Makefile"  
+(default : ~/esp/xtensa-esp32-elf/bin).
 
 ## **Compile**
 
-`make` or `make build`  
-will compile objects files in "builds" folder.
+`make` or `make build` will compile objects files in "builds" folder.
 
-The "Makefile" is basic, it can be improved.
+`make build /path/folder/project` to compile your project.
+
 
 
 ## **Template**
