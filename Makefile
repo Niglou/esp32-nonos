@@ -9,11 +9,11 @@ LD_DIR:= ld
 XTENSA:=	$(HOME)/esp/xtensa-esp32-elf
 CC:=	$(XTENSA)/bin/xtensa-esp32-elf-g++
 LD:=	$(XTENSA)/bin/xtensa-esp32-elf-ld
+SIZE:=$(XTENSA)/bin/xtensa-esp32-elf-size
 
 DIR_SRC:= $(shell find $(SRC_DIR) -type d -not -path './.*')
 SRC:=	$(shell find $(SRC_DIR) -name '*.S' -o -name '*.c' -o -name '*.cpp')
 OBJ:= $(addprefix $(OBJ_DIR)/, $(addsuffix .o, $(shell basename -a $(SRC))))
-
 LD_FILES= $(wildcard $(LD_DIR:=/*.ld))
 
 CFLAG:= $(addprefix -I, $(DIR_SRC))
@@ -21,7 +21,6 @@ LDFLAGS:= $(addprefix -T, $(LD_FILES)) -L$(XTENSA)/xtensa-esp32-elf/lib -L$(XTEN
 
 COMMAND:= $(word 2, $(MAKECMDGOALS))
 empty:=
-
 
 ifeq ($(COMMAND),$(empty))
 
@@ -38,7 +37,7 @@ P_OBJ:= $(addprefix $(P_OBJ_DIR)/, $(addsuffix .o, $(shell basename -a $(P_SRC))
 P_CFLAG:= $(CFLAG) $(addprefix -I, $(P_DIR_SRC))
 VPATH:= $(P_DIR_SRC) $(DIR_SRC)
 
-build : $(OBJ_DIR) esp32_nonos $(COMMAND)/$(OBJ_DIR) project
+build : $(OBJ_DIR) esp32_nonos $(COMMAND)/$(OBJ_DIR) $(COMMAND)/$(P_NAME).bin
 
 $(eval $(COMMAND):;@:)
 
@@ -53,10 +52,20 @@ esp32_nonos : $(OBJ)
 # Build project
 ifneq ($(COMMAND),$(empty))
 
-project : $(P_OBJ)
+$(COMMAND)/$(P_NAME).elf : $(P_OBJ)
 	@$(LD) $(LDFLAGS) $(OBJ) $(P_OBJ) -o $(COMMAND)/$(P_NAME).elf -lm -lgcc
 	@echo
 	@echo $(P_NAME) 'compiled !'
+	@echo
+
+size :
+	@$(SIZE) -B -d $(COMMAND)/$(P_NAME).elf
+	@echo
+
+$(COMMAND)/$(P_NAME).bin : $(COMMAND)/$(P_NAME).elf size
+	@esptool.py -c esp32 elf2image -o $(COMMAND)/$(P_NAME).bin -ff 80m -fm dio -fs 4MB $< #ESP32
+	@#esptool.py -c esp32 elf2image -ff 80m -fm dio -fs 4MB -sc 6,17,8,11,16 $< #ESP32-PICO-D4
+	@echo 'Binary "$(P_NAME).bin" created !'
 	@echo
 
 $(P_OBJ_DIR) :
