@@ -18,7 +18,7 @@
 #include <stdint.h>
 #include <stdbool.h>
 
-#include "components/registers/soc.h"
+#include <registers/soc.h>
 
 #ifdef __cplusplus
 extern "C" {
