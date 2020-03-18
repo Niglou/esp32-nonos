@@ -19,7 +19,7 @@ Once you have the binaries, change the path of binaries in "Makefile"
 
 `make` or `make build` will compile objects files in "builds" folder.
 
-`make build /path/folder/project` to compile your project.
+`make build /path/folder/project` to compile your project and build binary.
 
 ## **Flash**
 
