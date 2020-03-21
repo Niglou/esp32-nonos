@@ -19,8 +19,6 @@ Once you have the binaries, change the path of binaries in "Header.mk"
 
 `make` or `make build` will compile objects files in "builds" folder.
 
-`make build /path/folder/project` to compile your project and build binary.
-
 ## **Flash**
 
 You'll need **[esptool](https://github.com/espressif/esptool)**.  
