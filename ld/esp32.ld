@@ -1,18 +1,18 @@
 
 MEMORY {
   /*dport0_seg (RW) :        org = 0x3FF00000, len = 0x10*/
-	/*irom_seg (RX) :          org = 0x40000000, len = 0x5FFFF*/
-	/*iram_vector_seg (RX) :   org = 0x40080000, len = 0x400 */
-	iram_seg (RWXA) :          org = 0x40080000, len = 0x2FFFF
-	dram_seg (RWA) :           org = 0x3FFB0000, len = 0x2C200
-	drom0_0_seg (R) :          org = 0x3F400018, len = 0x400000-0x18
+  /*irom_seg (RX) :          org = 0x40000000, len = 0x5FFFF*/
+  /*iram_vector_seg (RX) :   org = 0x40080000, len = 0x400 */
+  iram_seg (RWXA) :          org = 0x40078000, len = 0x2FFFF
+  dram_seg (RWA) :           org = 0x3FFB0000, len = 0x2FFFF
+  drom0_0_seg (R) :          org = 0x3F400018, len = 0x400000-0x18
 }
 
 ENTRY(main_cpu0);
 
 SECTIONS {
 
-	.vectors : {
+  .vectors : {
     _init_start = ABSOLUTE(.);
     . = 0x0;
     KEEP(*(.WindowVectors.text));
@@ -35,27 +35,27 @@ SECTIONS {
     . = 0x3C0;
     KEEP(*(.DoubleExceptionVector.text));
     . = 0x400;
-		/* *(.*Vector.literal) */
+    /* *(.*Vector.literal) */
 
-		_init_end = ABSOLUTE(.);
-	} > iram_seg
+    _init_end = ABSOLUTE(.);
+  } > iram_seg
 
-	.text : {
-		. = ALIGN (16);
-		/*_loader_text_start = ABSOLUTE(.); */
-		*(.literal .literal*)
-		*(.text .text*)
-		*(.iram1 .iram1*)
+  .text : {
+    . = ALIGN (16);
+    /*_loader_text_start = ABSOLUTE(.); */
+    *(.literal .literal*)
+    *(.text .text*)
+    *(.iram1 .iram1*)
 
-	} > iram_seg
+  } > iram_seg
 
-	.data : {
+  .data : {
     _data_start = ABSOLUTE(.);
     *(.rodata .rodata*)
-		*(.data .data*)
-		*(.bss .bss*)
+    *(.data .data*)
+    *(.bss .bss*)
     _data_end = ABSOLUTE(.);
     . = ALIGN(4);
-	} > dram_seg
+  } > dram_seg
 
 }
