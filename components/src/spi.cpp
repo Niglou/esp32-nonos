@@ -1,6 +1,16 @@
 #include "spi.h"
 
+
+SPIPeriph::SPIPeriph() {}
+
 SPIPeriph::SPIPeriph(spi_periph_t _spi) {
+  if(_spi == SPI0_PERIPH) spi = &SPI0;
+  else if(_spi == SPI1_PERIPH) spi = &SPI1;
+  else if(_spi == SPI2_PERIPH) spi = &SPI2;
+  else if(_spi == SPI3_PERIPH) spi = &SPI3;
+  else spi = &SPI2;
+}
+void SPIPeriph::attach(spi_periph_t _spi) {
   if(_spi == SPI0_PERIPH) spi = &SPI0;
   else if(_spi == SPI1_PERIPH) spi = &SPI1;
   else if(_spi == SPI2_PERIPH) spi = &SPI2;

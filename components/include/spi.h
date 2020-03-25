@@ -15,7 +15,9 @@ typedef enum { SPI_READ_QIO, SPI_READ_DIO, SPI_READ_QUAD, SPI_READ_DUAL, SPI_REA
 
 class SPIPeriph {
   public:
+    SPIPeriph();    
     SPIPeriph(spi_periph_t _spi);
+    void attach(spi_periph_t _spi);
     void mode(spi_mode_t mode) const;
     void bit_order(spi_bit_order_t write, spi_bit_order_t read) const;
     void byte_order(spi_byte_order_t write, spi_byte_order_t read) const;
