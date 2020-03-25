@@ -16,7 +16,7 @@ void ISR_LVL5() {}
 
 void intr_enable(unsigned int interrupt) {
     asm volatile (
-		"wsr %0, intenable \n"
+		"wsr %0, intenable;"
 		"rsync"
 		::"r"(interrupt));
 }
