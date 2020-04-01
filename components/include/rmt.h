@@ -25,9 +25,37 @@ class RMTPeriph {
     void rst_pos_receiv() const;
     void start() const;
 
+    unsigned int* buffer() const;
+
   private:
     rmt_ch_t ch;
 
 };
+
+
+inline void RMTPeriph::mode(rmt_mode_t mode) const { RMT.conf_ch[ch].conf1.mem_owner = mode; }
+inline void RMTPeriph::clock(rmt_clk_t clk) const { RMT.conf_ch[ch].conf1.ref_always_on = clk; }
+inline void RMTPeriph::divider(unsigned int div) const { RMT.conf_ch[ch].conf0.div_cnt = div; }
+inline void RMTPeriph::conti_mode(rmt_bool_t mode) const { RMT.conf_ch[ch].conf1.tx_conti_mode = mode; }
+inline void RMTPeriph::carrier(rmt_bool_t state) const { RMT.conf_ch[ch].conf0.carrier_en = state; }
+inline void RMTPeriph::idle_en(rmt_bool_t en) const { RMT.conf_ch[ch].conf1.idle_out_en = en; }
+inline void RMTPeriph::idle_lvl(rmt_bool_t high) const { RMT.conf_ch[ch].conf1.idle_out_lv = high; }
+inline void RMTPeriph::data(unsigned int sel, unsigned int data) const { RMTMEM.ch[ch].data[sel].reg = data; }
+inline void RMTPeriph::rst_pos_trans() const {
+  RMT.conf_ch[ch].conf1.mem_rd_rst = 1;
+  RMT.conf_ch[ch].conf1.mem_rd_rst = 0;
+}
+
+inline void RMTPeriph::rst_pos_receiv() const {
+  RMT.conf_ch[ch].conf1.mem_wr_rst = 1;
+  RMT.conf_ch[ch].conf1.mem_wr_rst = 0;
+}
+
+inline void RMTPeriph::start() const {
+  RMT.conf_ch[ch].conf1.tx_start = 1;
+}
+inline unsigned int* RMTPeriph::buffer() const {
+  return (unsigned int*)(RMTMEM.ch[ch].data);
+}
 
 #endif

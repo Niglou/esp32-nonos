@@ -26,16 +26,11 @@ void SPIPeriph::byte_order(spi_byte_order_t write, spi_byte_order_t read ) const
     (*spi).user.wr_byte_order = write;
     (*spi).user.rd_byte_order = read;
 }
-void SPIPeriph::phase(spi_bool_t cmd, spi_bool_t addr, spi_bool_t dummy, spi_bool_t mosi, spi_bool_t miso) const {
-    (*spi).user.usr_command = cmd;
-    (*spi).user.usr_dummy = dummy;
-    (*spi).user.usr_addr = addr;
-    (*spi).user.usr_mosi = mosi;
-    (*spi).user.usr_miso = miso;
+void SPIPeriph::phase(unsigned int phase) const {
+    unsigned usr = (*spi).user.reg & 0x07FFFFFF;
+    (*spi).user.reg = usr | (phase << 27);
 }
-void SPIPeriph::keep_cs(spi_bool_t value) const {
-  (*spi).pin.cs_keep_active = value;
-}
+void SPIPeriph::keep_cs(bool value) const { (*spi).pin.cs_keep_active = value; }
 void SPIPeriph::cmd(unsigned int cmd) const { (*spi).user2.usr_command_value = cmd; }
 void SPIPeriph::addr(unsigned int addr) const { (*spi).addr = addr; }
 void SPIPeriph::cmd_len(unsigned int len) const { (*spi).user2.usr_command_bitlen = len; }
@@ -47,7 +42,8 @@ void SPIPeriph::read_mode(spi_read_t mode) const {
   (*spi).ctrl.reg &= 0x6202000;
   switch (mode) {
     case SPI_READ_SLOW:
-      (*spi).ctrl.fastrd_mode = 0; break;
+      (*spi).ctrl.fastrd_mode = 0;
+      break;
     case SPI_READ_FAST:
       break;
     case SPI_READ_QIO:
@@ -65,7 +61,7 @@ void SPIPeriph::read_mode(spi_read_t mode) const {
   }
 }
 void SPIPeriph::full_duplex(spi_com_t full_duplex) const { (*spi).user.doutdin = full_duplex; }
-void SPIPeriph::clk_sys(spi_bool_t sys) const { (*spi).clock.clk_equ_sysclk = sys; }
+void SPIPeriph::clk_sys(bool sys) const { (*spi).clock.clk_equ_sysclk = sys; }
 void SPIPeriph::pre_div(unsigned int div) const { (*spi).clock.clkdiv_pre = div; }
 void SPIPeriph::clkcnt(unsigned int cnt) const {
   if(mode()) {
@@ -125,10 +121,3 @@ void SPIPeriph::buf_highpart(spi_buf_t highpart) const {
 void SPIPeriph::buffer(unsigned int index, unsigned int data) const { (*spi).data_buf[(index & 0xF)] = data; }
 void SPIPeriph::clear_all_buffer() const { for(int i = 0; i < 16; i++) (*spi).data_buf[i] = 0; }
 void SPIPeriph::transfer() const { (*spi).cmd.usr = 1; }
-
-
-unsigned int SPIPeriph::mode() const { return (*spi).slave.slave_mode; }
-unsigned int SPIPeriph::addr() const { return (*spi).addr; }
-unsigned int* SPIPeriph::buffer() const { return (unsigned int*)&((*spi).data_buf); }
-unsigned int SPIPeriph::buffer(unsigned int read) const { return (*spi).data_buf[(read & 0xF)]; }
-unsigned int SPIPeriph::transfer_st() const { return (*spi).cmd.usr; }

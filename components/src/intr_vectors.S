@@ -49,20 +49,6 @@ _Level5Vector:
 
     .end        literal_prefix
 
-
-    .begin      literal_prefix .Level6InterruptVector
-    .section    .Level6InterruptVector.text, "ax"
-    .global     _Level6Vector
-    .type       _Level6Vector,@function
-    .global     xt_highint6
-    .align      4
-_Level6Vector:
-    wsr     a0, EXCSAVE_6
-    call0   xt_highint6
-
-    .end        literal_prefix
-
-
     .begin      literal_prefix .NMIExceptionVector
     .section    .NMIExceptionVector.text, "ax"
     .global     _NMIExceptionVector
