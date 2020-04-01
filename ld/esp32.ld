@@ -40,22 +40,34 @@ SECTIONS {
     _init_end = ABSOLUTE(.);
   } > iram_seg
 
-  .text : {
+  .text_pro : {
     . = ALIGN (16);
     /*_loader_text_start = ABSOLUTE(.); */
-    *(.literal .literal*)
-    *(.text .text*)
-    *(.iram1 .iram1*)
+    *(.literal .literal.*)
+    *(.text .text.*)
+    *(.iram1 .iram1.*)
 
   } > iram_seg
 
-  .data : {
+  .text_app ALIGN(0x8000) : {
+    *(.app_text .app_text.*)
+
+  } > iram_seg
+
+  .data_pro : {
     _data_start = ABSOLUTE(.);
-    *(.rodata .rodata*)
-    *(.data .data*)
-    *(.bss .bss*)
+    *(.rodata .rodata.*)
+    *(.data .data.*)
+    *(.bss .bss.*)
+    *(.eh_frame)
     _data_end = ABSOLUTE(.);
     . = ALIGN(4);
+
+  } > dram_seg
+
+  .data_app ALIGN(0x8000) : {
+    *(.app_data app_data*)
+
   } > dram_seg
 
 }
