@@ -32,7 +32,8 @@ void SPIPeriph::phase(unsigned int phase) const {
 }
 void SPIPeriph::keep_cs(bool value) const { (*spi).pin.cs_keep_active = value; }
 void SPIPeriph::cmd(unsigned int cmd) const { (*spi).user2.usr_command_value = cmd; }
-void SPIPeriph::addr(unsigned int addr) const { (*spi).addr = addr; }
+void SPIPeriph::addr_h(unsigned int addr) const { (*spi).addr = addr; }
+void SPIPeriph::addr_l(unsigned int addr) const { (*spi).slv_wr_status = addr; }
 void SPIPeriph::cmd_len(unsigned int len) const { (*spi).user2.usr_command_bitlen = len; }
 void SPIPeriph::dummy_len(unsigned int len) const { (*spi).user1.usr_dummy_cyclelen = len; }
 void SPIPeriph::addr_len(unsigned int len) const { (*spi).user1.usr_addr_bitlen = len; }

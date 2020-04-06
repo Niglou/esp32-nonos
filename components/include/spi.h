@@ -31,7 +31,8 @@ class SPIPeriph {
     void phase(unsigned int phase) const;
     void keep_cs(bool value) const;
     void cmd(unsigned int cmd) const;
-    void addr(unsigned int addr) const;
+    void addr_h(unsigned int addr) const;
+    void addr_l(unsigned int addr) const;
     void cmd_len(unsigned int len) const;
     void dummy_len(unsigned int len) const;
     void addr_len(unsigned int len) const;
